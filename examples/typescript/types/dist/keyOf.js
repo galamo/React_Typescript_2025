@@ -21,4 +21,4 @@ function searchCountriesDynamic(data, value, dynamicKey) {
     return result;
 }
 searchCountries([data_json_1.default], "israel");
-searchCountriesDynamic([data_json_1.default], "30", "population");
+searchCountriesDynamic([data_json_1.default], "30", "startOfWeek");

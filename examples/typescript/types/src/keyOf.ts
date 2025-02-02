@@ -1,5 +1,6 @@
 import { Country } from "./index";
 import data from "./data.json";
+
 function searchCountries(
   data: Array<Country>,
   value: string
@@ -28,4 +29,4 @@ function searchCountriesDynamic(
 }
 
 searchCountries([data], "israel");
-searchCountriesDynamic([data], "30", "population")
+searchCountriesDynamic([data], "30", "startOfWeek")
