@@ -5,7 +5,7 @@ const tax1 = (0, calculate_1.calculateTax)({ price: 100, tax: 0.2 });
 console.log(tax1); // Output: 20
 const tax2 = (0, calculate_1.calculateTax)({ price: "$200", tax: 0.15 });
 console.log(tax2); // Output: 30
-const coin = { value: 11, symbol: "AA", desc: "", tech: [] };
+const coin = { value: 11, symbol: " AA", desc: "", tech: [] };
 const tradeSystem = {
     title: "tarde-in",
     currencies: ["BTC", "ETH"],

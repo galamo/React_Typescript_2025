@@ -14,8 +14,8 @@ type Coin = {
   tech: Array<string>;
 };
 
-const coin: Coin = { value: 11, symbol: "AA", desc: "", tech: [] };
-type Country = typeof data;
+const coin: Coin = { value: 11, symbol: " AA", desc: "", tech: [] };
+export type Country = typeof data;
 
 interface ITradeSystem {
   title: string;
