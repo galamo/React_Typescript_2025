@@ -20,3 +20,14 @@ async function init() {
 }
 
 init();
+
+function metricUI() {
+  console.log("send to server");
+  fetch("http://metric.ui.server:443/user-error", {
+    method: "post",
+    body: { error: "Snir operation failed" },
+  });
+}
+metricUI();
+
+
