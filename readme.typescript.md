@@ -428,7 +428,7 @@ const scanErrors: Array<ScanResult> = [
 ];
 ```
 
-### **Exercise_1: keyof Type and Functionality**
+### **Exercise_1: keyof Type and Functionality HOMEWORK-2.2**
 
 use `type ScanResult` that represents the results of a vulnerability scan & implement a function named `getScanResultStats` that can retrieve any property of the ScanResult object dynamically using a keyof constraint.
 
