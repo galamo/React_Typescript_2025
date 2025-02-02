@@ -1,0 +1,8 @@
+.Header {
+	height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: darkcyan;
+    font-style: italic;
+}

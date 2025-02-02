@@ -1,0 +1,11 @@
+.Container {
+	height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.CopyrightsText {
+    color: darkgoldenrod;
+    font-weight: bold;
+}

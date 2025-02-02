@@ -1,0 +1,9 @@
+.ContactUs > form {
+	width: 400px;
+}
+
+
+.ContactUs > form > * {
+	margin-bottom: 20px;
+}
+
