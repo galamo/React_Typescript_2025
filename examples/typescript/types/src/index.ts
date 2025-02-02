@@ -1,4 +1,11 @@
 import data from "./data.json";
+import { calculateTax } from "./calculate";
+
+const tax1 = calculateTax({ price: 100, tax: 0.2 });
+console.log(tax1); // Output: 20
+
+const tax2 = calculateTax({ price: "$200", tax: 0.15 });
+console.log(tax2); // Output: 30
 
 type Coin = {
   value: number;
@@ -38,7 +45,7 @@ async function getCountries(): Promise<Array<Country>> {
 
 async function init() {
   const result = await getCountries();
-  console.log(result.map((item) => item?.name?.common));
+  // console.log(result.map((item) => item?.name?.common));
 }
 
 type CoinApi = Partial<Coin>;

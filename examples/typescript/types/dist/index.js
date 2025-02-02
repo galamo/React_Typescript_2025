@@ -1,5 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const calculate_1 = require("./calculate");
+const tax1 = (0, calculate_1.calculateTax)({ price: 100, tax: 0.2 });
+console.log(tax1); // Output: 20
+const tax2 = (0, calculate_1.calculateTax)({ price: "$200", tax: 0.15 });
+console.log(tax2); // Output: 30
 const coin = { value: 11, symbol: "AA", desc: "", tech: [] };
 const tradeSystem = {
     title: "tarde-in",
@@ -16,7 +21,7 @@ async function getCountries() {
 }
 async function init() {
     const result = await getCountries();
-    console.log(result.map((item) => item?.name?.common));
+    // console.log(result.map((item) => item?.name?.common));
 }
 var COINS;
 (function (COINS) {
