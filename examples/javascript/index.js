@@ -8,3 +8,4 @@ function getUserAndDraw() {
 }
 getUserAndDraw();
 console.log("Script end");
+
