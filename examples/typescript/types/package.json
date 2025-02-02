@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "compile": "tsc --watch"
+    "compile": "tsc --watch",
+    "start": "nodemon ./dist/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "nodemon": "^3.1.9",
     "typescript": "^5.7.3"
   }
 }

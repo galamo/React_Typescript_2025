@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const coin = { value: 11, symbol: "AA", desc: "", tech: [] };
 const tradeSystem = {
     title: "tarde-in",
     currencies: ["BTC", "ETH"],
@@ -6,7 +8,13 @@ const tradeSystem = {
     numberOfUsers: 999,
 };
 const user = 112313;
-function getCountries() {
-    return "1";
+async function getCountries() {
+    const result = await fetch("https://restcountries.com/v3.1/all");
+    const data = await result.json();
+    return data;
 }
-console.log(tradeSystem);
+async function init() {
+    const result = await getCountries();
+    console.log(result.map((item) => item?.name?.common));
+}
+init();
