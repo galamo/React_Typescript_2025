@@ -36,3 +36,8 @@ for (let index = 0; index < employees.length; index++) {
     console.log(element.name);
   }
 }
+
+export function testSomething() {}
+export function testSomething2() {}
+export function testSomething3() {}
+export default function parseObject() {}
