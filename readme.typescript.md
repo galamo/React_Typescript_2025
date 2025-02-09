@@ -367,7 +367,7 @@ function greet<T extends { name: string }>(person: T): string {
 const user = { name: "Alice", age: 25 };
 console.log(greet(user));
 
-const company = { name: "Elbit", employees: 100 };
+const company = { name: "Adi", employees: 100 };
 console.log(greet(company));
 
 const invalidUser = { age: 30 };
@@ -441,3 +441,8 @@ Implement a function named `filterScans` that filters an array of ScanResult obj
 
 Accepts a ScanResult Array, key of the ScanResult type & value.
 Returns the requested filtered array..
+
+
+
+
+
