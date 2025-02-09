@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const calculate_1 = require("./calculate");
+const generic_usage_1 = require("./generic.usage");
+(0, generic_usage_1.initMainFunction)();
 const tax1 = (0, calculate_1.calculateTax)({ price: 100, tax: 0.2 });
 console.log(tax1); // Output: 20
 const tax2 = (0, calculate_1.calculateTax)({ price: "$200", tax: 0.15 });

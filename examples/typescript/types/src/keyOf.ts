@@ -22,11 +22,12 @@ function searchCountriesDynamic(
   if (typeof value !== "string") return;
   if (!Array.isArray(data)) return;
 
-  const result = data.filter(
-    (item) => (item?[dynamicKey] as string).toLowerCase() === value.toLowerCase()
-  );
-  return result;
+  //   const result = data.filter(
+  //     // @ts-ignore
+  //     // (item) => (item?[dynamicKey]).toLowerCase() === value.toLowerCase()
+  //   );
+  return;
 }
 
 searchCountries([data], "israel");
-searchCountriesDynamic([data], "30", "startOfWeek")
+searchCountriesDynamic([data], "30", "startOfWeek");

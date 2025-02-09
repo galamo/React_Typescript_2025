@@ -17,8 +17,11 @@ function searchCountriesDynamic(data, value, dynamicKey) {
         return;
     if (!Array.isArray(data))
         return;
-    const result = data.filter((item) => (item ? [dynamicKey] : ).toLowerCase() === value.toLowerCase());
-    return result;
+    //   const result = data.filter(
+    //     // @ts-ignore
+    //     // (item) => (item?[dynamicKey]).toLowerCase() === value.toLowerCase()
+    //   );
+    return;
 }
 searchCountries([data_json_1.default], "israel");
 searchCountriesDynamic([data_json_1.default], "30", "startOfWeek");

@@ -1,6 +1,7 @@
 import data from "./data.json";
 import { calculateTax } from "./calculate";
-
+import { initMainFunction } from "./generic.usage";
+initMainFunction();
 const tax1 = calculateTax({ price: 100, tax: 0.2 });
 console.log(tax1); // Output: 20
 
