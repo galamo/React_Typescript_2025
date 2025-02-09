@@ -1435,3 +1435,10 @@ root.render(<App />);
 
 # Support Lazy loading
 - support lazy loading the Reports Component
+
+
+# Ex 9-2-2025
+1. On the counriesPage add new button
+2. <button> Asia Only </Button>
+3. the button will filter only Countries from Region Asia.
+4. the button should impact the current existing filter as well

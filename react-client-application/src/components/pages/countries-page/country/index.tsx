@@ -1,3 +1,4 @@
+import { useState } from "react";
 import css from "./index.module.css";
 type Country = {
   name: string;
@@ -8,17 +9,27 @@ type Country = {
 };
 
 export function Country(props: Country) {
+  const [showPopulation, setShowPopulation] = useState<boolean>(false);
+
   return (
     <div className={css.card}>
       <h1>{props.name}</h1>
       <h2> {props.region} </h2>
       <img src={props.flag} height={300} width={300} alt="" />
       <div>
-        <input value={props.population} />
+        <button
+          onClick={() => {
+            setShowPopulation(!showPopulation);
+          }}
+        >
+          Show More
+        </button>
       </div>
-      <div>
-        <button>Show More</button>
-      </div>
+      {showPopulation ? (
+        <div>
+          <input value={props.population} />
+        </div>
+      ) : null}
     </div>
   );
 }
