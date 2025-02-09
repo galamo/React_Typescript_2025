@@ -18,9 +18,11 @@ function Product() {
 
 type HeaderProps = {
   title: string;
+  color: string;
 };
 
 function HeaderApp(props: HeaderProps) {
+  if (!props.title) return;
   return <h1 style={{ background: "yellow" }}>{props.title}</h1>;
 }
 
@@ -32,6 +34,7 @@ function App() {
         <HeaderApp title="Home" />
         <HeaderApp title="About" />
         <HeaderApp title="Contact us" />
+        <HeaderApp title="" />
         <h1>{title}</h1>
         <Product />
         <User />
