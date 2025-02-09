@@ -16,11 +16,22 @@ function Product() {
   );
 }
 
+type HeaderProps = {
+  title: string;
+};
+
+function HeaderApp(props: HeaderProps) {
+  return <h1 style={{ background: "yellow" }}>{props.title}</h1>;
+}
+
 function App() {
   const title: string = "This is message";
   return (
     <>
       <div>
+        <HeaderApp title="Home" />
+        <HeaderApp title="About" />
+        <HeaderApp title="Contact us" />
         <h1>{title}</h1>
         <Product />
         <User />
