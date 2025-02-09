@@ -18,12 +18,13 @@ function Product() {
 
 type HeaderProps = {
   title: string;
-  color: string;
+  color?: string;
 };
 
 function HeaderApp(props: HeaderProps) {
+  const { color = "blue" } = props;
   if (!props.title) return;
-  return <h1 style={{ background: "yellow" }}>{props.title}</h1>;
+  return <h1 style={{ color, background: "yellow" }}>{props.title}</h1>;
 }
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
   return (
     <>
       <div>
-        <HeaderApp title="Home" />
+        <HeaderApp color={"red"} title="Home" />
         <HeaderApp title="About" />
         <HeaderApp title="Contact us" />
         <HeaderApp title="" />
