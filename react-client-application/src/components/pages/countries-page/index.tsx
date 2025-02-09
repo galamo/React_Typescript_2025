@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { HeaderApp } from "../../ui/header-app";
 import { Country } from "./country";
 import data from "./data.json";
@@ -8,7 +8,7 @@ export default function CountriesPage() {
   const [filter, setFilter] = useState("");
   const [isAsia, setIsAsia] = useState(false);
 
-  function onFilterHandler(event: any) {
+  function onFilterHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setFilter(event.target.value);
   }
   function onAsiaHandler() {
