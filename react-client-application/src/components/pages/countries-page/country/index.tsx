@@ -1,6 +1,6 @@
 import { useState } from "react";
 import css from "./index.module.css";
-type Country = {
+export type Country = {
   name: string;
   flag: string;
   population: number;
