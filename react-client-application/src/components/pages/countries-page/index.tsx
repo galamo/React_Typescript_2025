@@ -3,6 +3,7 @@ import axios from "axios";
 import { Country } from "./country";
 import StaticData from "./data.json";
 import css from "./index.module.css";
+import debounce from "lodash/debounce";
 import { CircularProgress, Input, Skeleton } from "@mui/material";
 type CountryServer = (typeof StaticData)[0]; // using the StaticData only for Type
 
@@ -18,6 +19,7 @@ export default function CountriesPage() {
   const [countryName, setCountryName] = useState("");
 
   useEffect(() => {
+    let isSubscribed = true;
     async function getCountries() {
       try {
         setIsLoading(true);
@@ -39,7 +41,9 @@ export default function CountriesPage() {
             code: item.cca3,
           };
         });
-        setCountries(countriesClientModeled);
+        if (isSubscribed) {
+          setCountries(countriesClientModeled);
+        }
       } catch (ex) {
         console.log(ex);
         alert("Something went wrong!");
@@ -50,7 +54,10 @@ export default function CountriesPage() {
     getCountries();
 
     return () => {
-      console.log("CountriesPage Component is Destroyed");
+      isSubscribed = false;
+      console.log(
+        `${countryName} is not relevant anymore, subscribed? ${isSubscribed}`
+      );
     };
   }, [countryName]);
 
@@ -64,6 +71,8 @@ export default function CountriesPage() {
   function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
     setCountryName(event.target.value);
   }
+
+  const handleSearchDebounce = debounce(handleSearch, 250);
 
   const filteredCountriesAsia = isAsia
     ? countries.filter((item) => item?.region.toLowerCase() === "asia")
@@ -81,7 +90,7 @@ export default function CountriesPage() {
       <button onClick={onAsiaHandler}> Only Asia Countries </button>
       <div>
         <h2> Server side filters</h2>
-        <Input onChange={handleSearch} />
+        <Input onChange={handleSearchDebounce} />
       </div>
       <div>
         <h1 style={{ textAlign: "center" }}>

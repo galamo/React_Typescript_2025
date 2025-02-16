@@ -1,5 +1,6 @@
 import { useState } from "react";
 import css from "./index.module.css";
+import { NavLink, useNavigate } from "react-router";
 export type Country = {
   name: string;
   flag: string;
@@ -13,7 +14,9 @@ export function Country(props: Country) {
 
   return (
     <div className={css.card}>
-      <h1>{props.name}</h1>
+      <NavLink to={`/country/${props.code}`}>
+        <h1>{props.name}</h1>
+      </NavLink>
       <h2> {props.region} </h2>
       <img src={props.flag} height={300} width={300} alt="" />
       <div>
