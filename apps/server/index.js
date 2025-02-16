@@ -78,7 +78,7 @@ app.get("/countries-delay/name/:name", async (req, res, next) => {
     if (delayName % 2 === 0) {
       setTimeout(() => {
         return res.json({ result });
-      }, 1000);
+      }, 4000);
     } else {
       return res.json({ result });
     }

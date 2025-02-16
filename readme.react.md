@@ -1449,3 +1449,8 @@ root.render(<App />);
 2. The setting page will contain - header setting 
 3. Input, user name, button set user name.
 4. when clicking the button the user will be set in the state and the setting page header will be changed to: `Hello <UserName>`
+
+# Ex 2 - 16-2-2025
+1. Complete the single Country Page
+2. Use useEffect to fetch the country data by Code and use Country component
+3. `http://localhost:2200/api/countries/code/sle`
