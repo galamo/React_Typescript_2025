@@ -3,17 +3,21 @@ import { useState } from "react";
 import css from "./style.module.css";
 import { z } from "zod";
 import Swal from "sweetalert2";
-const LOGIN_URL = "http://localhost:2200/api/auth/register";
+import { loginUser } from "./service";
+import { useNavigate } from "react-router";
 
 const LoginSchema = z.object({
   password: z.string().min(3),
   userName: z.string().email().max(200),
 });
 
+export type UserLoginType = z.infer<typeof LoginSchema>;
+
 export default function LoginPage() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   function handleUserName(event: React.ChangeEvent<HTMLInputElement>) {
     setUserName(event.target.value);
@@ -23,7 +27,35 @@ export default function LoginPage() {
     setPassword(event.target.value);
   }
 
-  function loginAction() {}
+  async function handleLoginAction() {
+    const result = LoginSchema.safeParse({
+      userName,
+      password,
+    });
+    console.log(result);
+    if (!result.success) {
+      Swal.fire({
+        title: `${result.error?.errors[0].message}`,
+        icon: "error",
+      });
+    }
+    if (result.success) {
+      try {
+        setIsLoading(true);
+        const result = await loginUser({ userName, password });
+        // something very important should happen here!!
+        console.log(result);
+        navigate("/countries");
+      } catch {
+        Swal.fire({
+          title: `Something went wrong`,
+          icon: "error",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  }
 
   return (
     <div className={css.container}>
@@ -54,24 +86,7 @@ export default function LoginPage() {
             <CircularProgress />
           ) : (
             <div>
-              <Button
-                onClick={() => {
-                  const result = LoginSchema.safeParse({
-                    userName,
-                    password,
-                  });
-                  console.log(result);
-                  if (!result.success) {
-                    Swal.fire({
-                      title: `${result.error?.errors[0].message}`,
-                      icon: "error",
-                    });
-                  }
-                  if (result.success) loginAction();
-                }}
-              >
-                Login
-              </Button>
+              <Button onClick={handleLoginAction}>Login</Button>
             </div>
           )}
         </div>

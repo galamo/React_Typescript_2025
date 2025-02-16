@@ -10,5 +10,6 @@ export default function CountryPage() {
     <div>
       <h1> COUNTRY: {params.code}</h1>
     </div>
+    // TODO:  request to api for counry by code
   );
 }
