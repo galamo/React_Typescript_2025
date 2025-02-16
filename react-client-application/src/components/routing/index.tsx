@@ -4,6 +4,7 @@ import NotFound from "../pages/not-found-page";
 import SettingsPage from "../pages/settings-page";
 import CountryPage from "../pages/country-page";
 import RegistrationPage from "../pages/register-page";
+import LoginPage from "../pages/login-page";
 
 export default function Routing() {
   return (
@@ -21,6 +22,7 @@ export default function Routing() {
         <Route path="/countries" element={<CountriesPage />} />
         <Route path="/country/:code" element={<CountryPage />} />
         <Route path="/auth/register" element={<RegistrationPage />} />
+        <Route path="/auth/login" element={<LoginPage />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

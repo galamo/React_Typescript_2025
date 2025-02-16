@@ -3,25 +3,17 @@ import { useState } from "react";
 import css from "./style.module.css";
 import { z } from "zod";
 import Swal from "sweetalert2";
-import { registerUser } from "./service";
-import { useNavigate } from "react-router";
+const LOGIN_URL = "http://localhost:2200/api/auth/register";
 
-const RegistrationSchema = z.object({
+const LoginSchema = z.object({
   password: z.string().min(3),
   userName: z.string().email().max(200),
-  phone: z.string().min(10).max(10),
 });
-export type RegisterUserType = z.infer<typeof RegistrationSchema>;
-export default function RegistrationPage() {
+
+export default function LoginPage() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-
-  function handlePhone(event: React.ChangeEvent<HTMLInputElement>) {
-    setPhone(event.target.value);
-  }
 
   function handleUserName(event: React.ChangeEvent<HTMLInputElement>) {
     setUserName(event.target.value);
@@ -31,40 +23,13 @@ export default function RegistrationPage() {
     setPassword(event.target.value);
   }
 
-  async function registerAction() {
-    try {
-      setIsLoading(true);
-      const result = await registerUser({ userName, phone, password });
-      Swal.fire({
-        title: result.message,
-        icon: "success",
-      });
-      navigate("/auth/login");
-    } catch (ex) {
-      console.log(ex);
-      Swal.fire({
-        title: `Something went wrong!`,
-        icon: "error",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  function loginAction() {}
 
   return (
     <div className={css.container}>
       <div className={css.registerContainer}>
         <div className={css.headerCenter}>
-          <h1>Registration</h1>
-        </div>
-        <div>
-          <TextField
-            id="outlined-basic"
-            label="phone"
-            variant="outlined"
-            onChange={handlePhone}
-            value={phone}
-          />
+          <h1>Login</h1>
         </div>
         <div>
           <TextField
@@ -91,10 +56,9 @@ export default function RegistrationPage() {
             <div>
               <Button
                 onClick={() => {
-                  const result = RegistrationSchema.safeParse({
+                  const result = LoginSchema.safeParse({
                     userName,
                     password,
-                    phone,
                   });
                   console.log(result);
                   if (!result.success) {
@@ -103,10 +67,10 @@ export default function RegistrationPage() {
                       icon: "error",
                     });
                   }
-                  if (result.success) registerAction();
+                  if (result.success) loginAction();
                 }}
               >
-                Register
+                Login
               </Button>
             </div>
           )}
