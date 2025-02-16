@@ -108,6 +108,12 @@ function ResponsiveAppBar() {
               </Button>
             </NavLink>
 
+            <NavLink to="/settings">
+              <Button sx={{ my: 2, color: "white", display: "block" }}>
+                Settings
+              </Button>
+            </NavLink>
+
             <Button
               onClick={() => {
                 navigate("/about");
