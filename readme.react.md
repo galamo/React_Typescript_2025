@@ -1442,3 +1442,10 @@ root.render(<App />);
 2. <button> Asia Only </Button>
 3. the button will filter only Countries from Region Asia.
 4. the button should impact the current existing filter as well
+
+
+# Ex 16-2-2025
+1. Add new Route - Settings Page.
+2. The setting page will contain - header setting 
+3. Input, user name, button set user name.
+4. when clicking the button the user will be set in the state and the setting page header will be changed to: `Hello <UserName>`
