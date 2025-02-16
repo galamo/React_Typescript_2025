@@ -1,6 +1,6 @@
 import { useState } from "react";
 import css from "./index.module.css";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 export type Country = {
   name: string;
   flag: string;
