@@ -1432,25 +1432,32 @@ root.render(<App />);
 - **Concurrent features** improve responsiveness by prioritizing rendering tasks.
 - Use `Suspense` with `lazy` to optimize component loading in your app.
 
-
 # Support Lazy loading
+
 - support lazy loading the Reports Component
 
-
 # Ex 9-2-2025
+
 1. On the counriesPage add new button
 2. <button> Asia Only </Button>
 3. the button will filter only Countries from Region Asia.
 4. the button should impact the current existing filter as well
 
-
 # Ex 1 - 16-2-2025
+
 1. Add new Route - Settings Page.
-2. The setting page will contain - header setting 
+2. The setting page will contain - header setting
 3. Input, user name, button set user name.
 4. when clicking the button the user will be set in the state and the setting page header will be changed to: `Hello <UserName>`
 
 # Ex 2 - 16-2-2025
+
 1. Complete the single Country Page
 2. Use useEffect to fetch the country data by Code and use Country component
 3. `http://localhost:2200/api/countries/code/sle`
+
+# Ex 3 - 16-2-2025
+
+1. Create Login Page
+2. Use Schema Validation Zod
+3. On click on button login - do nothing! just validate
