@@ -1,10 +1,13 @@
 import "./App.css";
-import CountriesPage from "./components/pages/countries-page";
+import Layout from "./components/layout";
+import { BrowserRouter } from "react-router";
 
 function App() {
   return (
     <>
-      <CountriesPage />
+      <BrowserRouter>
+        <Layout />
+      </BrowserRouter>
     </>
   );
 }

@@ -25,8 +25,8 @@ export default function CountriesPage() {
     : filteredCountriesAsia;
 
   return (
-    <div>
-      <HeaderApp title={"Countries"} />
+    <div style={{ marginTop: "50px" }}>
+      {/* <HeaderApp title={"Countries"} /> */}
       <input onChange={onFilterHandler} />
       <button onClick={onAsiaHandler}> Only Asia Countries </button>
       <div>
