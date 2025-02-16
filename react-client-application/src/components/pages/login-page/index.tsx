@@ -43,7 +43,7 @@ export default function LoginPage() {
       try {
         setIsLoading(true);
         const result = await loginUser({ userName, password });
-        // something very important should happen here!!
+        localStorage.setItem("token", result.token);
         console.log(result);
         navigate("/countries");
       } catch {

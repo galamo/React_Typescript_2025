@@ -160,6 +160,27 @@ app.get("/secure", async (req, res, next) => {
   }
 });
 
+app.get("/settings", async (req, res, next) => {
+  const token = req.body.token || req.query.token || req.headers.authorization;
+  try {
+    console.log("secure");
+    jwt.verify(token, "token", function (err, decoded) {
+      if (err) {
+        return res.status(401).json({ message: "Unauthorized!" });
+      } else {
+        return res.json({
+          userSettings: {
+            lastPageVisit: "/countries",
+            userLastLogin: new Date().toDateString(),
+          },
+        });
+      }
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
+
 app.get("/teams", (req, res, next) => {
   res.json({
     status: "success",
