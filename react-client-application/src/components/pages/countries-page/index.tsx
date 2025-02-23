@@ -5,7 +5,7 @@ import StaticData from "./data.json";
 import css from "./index.module.css";
 import debounce from "lodash/debounce";
 import { CircularProgress, Input, Skeleton } from "@mui/material";
-type CountryServer = (typeof StaticData)[0]; // using the StaticData only for Type
+export type CountryServer = (typeof StaticData)[0]; // using the StaticData only for Type
 
 const dns = "http://localhost:2200/api";
 const urlAllCountries = `${dns}/countries-delay/`;

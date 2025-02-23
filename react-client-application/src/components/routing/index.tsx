@@ -9,6 +9,7 @@ import { AuthLayoutPage } from "../pages/auth-page";
 import AsyncProtectedRoute from "../async-auth-protector";
 import MainPage from "../pages/main-page";
 import ForgatPasswordPage from "../pages/auth-page/forgat-pass-page";
+import ReportsPage from "../pages/reports-page";
 
 export default function Routing() {
   return (
@@ -19,7 +20,7 @@ export default function Routing() {
           <Route path="settings" element={<SettingsPage />} />
           <Route path="countries" element={<CountriesPage />} />
         </Route>
-
+        <Route path="/reports" element={<ReportsPage />} />
         <Route path="/country/:code" element={<CountryPage />} />
         <Route path="/auth" element={<AuthLayoutPage />}>
           <Route index element={<Navigate to="register" />} />
