@@ -1,5 +1,5 @@
 import { Button, CircularProgress, TextField } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useReducer } from "react";
 import css from "./style.module.css";
 import { z } from "zod";
 import Swal from "sweetalert2";
@@ -14,30 +14,43 @@ const LoginSchema = z.object({
 export type UserLoginType = z.infer<typeof LoginSchema>;
 
 export default function LoginPage() {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  // const [userName, setUserName] = useState("");
+  // const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
 
+  const userNameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const counterFailureInLoginRef = useRef(0);
+
+  const navigate = useNavigate();
+  console.log("Login page render.,.,,");
   useEffect(() => {
     localStorage.removeItem("token");
   }, []);
 
-  function handleUserName(event: React.ChangeEvent<HTMLInputElement>) {
-    setUserName(event.target.value);
-  }
+  // function handleUserName(event: React.ChangeEvent<HTMLInputElement>) {
+  //   setUserName(event.target.value);
+  // }
 
-  function handlePassword(event: React.ChangeEvent<HTMLInputElement>) {
-    setPassword(event.target.value);
-  }
+  // function handlePassword(event: React.ChangeEvent<HTMLInputElement>) {
+  //   setPassword(event.target.value);
+  // }
 
   async function handleLoginAction() {
+    if (counterFailureInLoginRef.current > 3) {
+      window.location.href = "/auth/register";
+    }
+    const userName = userNameRef?.current?.value;
+    const password = passwordRef?.current?.value;
+    console.log(userName, password);
     const result = LoginSchema.safeParse({
       userName,
       password,
     });
     console.log(result);
     if (!result.success) {
+      counterFailureInLoginRef.current++;
       Swal.fire({
         title: `${result.error?.errors[0].message}`,
         icon: "error",
@@ -46,6 +59,7 @@ export default function LoginPage() {
     if (result.success) {
       try {
         setIsLoading(true);
+
         const result = await loginUser({ userName, password });
         localStorage.setItem("token", result.token);
         navigate("/countries");
@@ -68,21 +82,36 @@ export default function LoginPage() {
             <h1>Login</h1>
           </div>
           <div>
-            <TextField
+            {/* <TextField
               onChange={handleUserName}
               id="outlined-basic"
               label="username"
               variant="outlined"
               value={userName}
+            /> */}
+            {/* <input type="text" ref={userNameRef} /> */}
+            <TextField
+              inputRef={userNameRef}
+              id="outlined-basic"
+              label="username"
+              variant="outlined"
+              // value={userName}
             />
           </div>
           <div>
-            <TextField
+            {/* <TextField
               onChange={handlePassword}
               id="outlined-basic"
               label="password"
               variant="outlined"
               value={password}
+            /> */}
+            <TextField
+              inputRef={passwordRef}
+              id="outlined-basic"
+              label="password"
+              variant="outlined"
+              // value={password}
             />
           </div>
           <div>
@@ -96,7 +125,6 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-     
     </>
   );
 }
