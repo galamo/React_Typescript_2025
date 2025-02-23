@@ -1461,3 +1461,13 @@ root.render(<App />);
 1. Create Login Page
 2. Use Schema Validation Zod
 3. On click on button login - do nothing! just validate
+
+- lazy loading
+- useMemo, useCallback
+- useContext, usereducer
+  more.
+
+# Ex 1 - 23.2
+
+1. use useEffect inside login
+2. clear the token on mounting

@@ -12,11 +12,12 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { NavLink, useNavigate } from "react-router";
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { useState } from "react";
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -51,7 +52,7 @@ function ResponsiveAppBar() {
               <MenuIcon />
             </IconButton>
             <Menu
-              open={false}
+              open={true}
               onClose={() => {}}
               id="menu-appbar"
               anchorOrigin={{
@@ -125,7 +126,12 @@ function ResponsiveAppBar() {
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton sx={{ p: 0 }}>
+              <IconButton
+                sx={{ p: 0 }}
+                onClick={() => {
+                  setIsMenuOpen(!isMenuOpen);
+                }}
+              >
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -141,16 +147,28 @@ function ResponsiveAppBar() {
                 vertical: "top",
                 horizontal: "right",
               }}
-              open={false}
-              onClose={() => {}}
+              open={isMenuOpen}
+              onClose={() => {
+                setIsMenuOpen(false);
+              }}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting}>
-                  <Typography sx={{ textAlign: "center" }}>
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))}
+              <MenuItem
+                key={1}
+                onClick={() => {
+                  // if our login is part of our application
+                  // setIsMenuOpen(false);
+                  // navigate("/auth/login");
+                  // our login in another domain
+                  // api request - logout
+                  localStorage.removeItem("token");
+                  window.location.href = "/auth/login";
+                }}
+              >
+                <Typography sx={{ textAlign: "center" }}>Logout</Typography>
+              </MenuItem>
+              <MenuItem key={2}>
+                <Typography sx={{ textAlign: "center" }}>About</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

@@ -96,7 +96,6 @@ export default function RegistrationPage() {
                     password,
                     phone,
                   });
-                  console.log(result);
                   if (!result.success) {
                     Swal.fire({
                       title: `${result.error?.errors[0].message}`,

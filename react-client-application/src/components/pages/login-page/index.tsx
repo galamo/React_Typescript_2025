@@ -44,7 +44,6 @@ export default function LoginPage() {
         setIsLoading(true);
         const result = await loginUser({ userName, password });
         localStorage.setItem("token", result.token);
-        console.log(result);
         navigate("/countries");
       } catch {
         Swal.fire({
