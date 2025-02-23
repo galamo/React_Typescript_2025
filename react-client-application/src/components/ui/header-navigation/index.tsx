@@ -160,7 +160,6 @@ function ResponsiveAppBar() {
                   // navigate("/auth/login");
                   // our login in another domain
                   // api request - logout
-                  localStorage.removeItem("token");
                   window.location.href = "/auth/login";
                 }}
               >

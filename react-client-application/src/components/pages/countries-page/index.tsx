@@ -19,6 +19,7 @@ export default function CountriesPage() {
   const [countryName, setCountryName] = useState("");
 
   useEffect(() => {
+    console.log("CountriesPage route loaded")
     let isSubscribed = true;
     async function getCountries() {
       try {

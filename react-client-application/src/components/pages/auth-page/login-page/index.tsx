@@ -1,5 +1,5 @@
 import { Button, CircularProgress, TextField } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import css from "./style.module.css";
 import { z } from "zod";
 import Swal from "sweetalert2";
@@ -18,6 +18,10 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.removeItem("token");
+  }, []);
 
   function handleUserName(event: React.ChangeEvent<HTMLInputElement>) {
     setUserName(event.target.value);
@@ -57,40 +61,43 @@ export default function LoginPage() {
   }
 
   return (
-    <div className={css.container}>
-      <div className={css.registerContainer}>
-        <div className={css.headerCenter}>
-          <h1>Login</h1>
-        </div>
-        <div>
-          <TextField
-            onChange={handleUserName}
-            id="outlined-basic"
-            label="username"
-            variant="outlined"
-            value={userName}
-          />
-        </div>
-        <div>
-          <TextField
-            onChange={handlePassword}
-            id="outlined-basic"
-            label="password"
-            variant="outlined"
-            value={password}
-          />
-        </div>
-        <div>
-          {isLoading ? (
-            <CircularProgress />
-          ) : (
-            <div>
-              <Button onClick={handleLoginAction}>Login</Button>
-            </div>
-          )}
+    <>
+      <div className={css.container}>
+        <div className={css.registerContainer}>
+          <div className={css.headerCenter}>
+            <h1>Login</h1>
+          </div>
+          <div>
+            <TextField
+              onChange={handleUserName}
+              id="outlined-basic"
+              label="username"
+              variant="outlined"
+              value={userName}
+            />
+          </div>
+          <div>
+            <TextField
+              onChange={handlePassword}
+              id="outlined-basic"
+              label="password"
+              variant="outlined"
+              value={password}
+            />
+          </div>
+          <div>
+            {isLoading ? (
+              <CircularProgress />
+            ) : (
+              <div>
+                <Button onClick={handleLoginAction}>Login</Button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+     
+    </>
   );
 }
 

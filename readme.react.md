@@ -1471,3 +1471,7 @@ root.render(<App />);
 
 1. use useEffect inside login
 2. clear the token on mounting
+
+# Ex 2 - 23.2
+
+1. use the AsyncProtectedRoute to protect the main page and setting page

@@ -10,6 +10,7 @@ export default function SettingsPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("SettingsPage route loaded");
     async function getSettings() {
       try {
         await axios.get(SETTINGS_URL, {
