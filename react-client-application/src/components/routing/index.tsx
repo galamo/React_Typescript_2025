@@ -7,23 +7,16 @@ import RegistrationPage from "../pages/auth-page/register-page";
 import LoginPage from "../pages/auth-page/login-page";
 import { AuthLayoutPage } from "../pages/auth-page";
 import AsyncProtectedRoute from "../async-auth-protector";
+import MainPage from "../pages/main-page";
 
 export default function Routing() {
   return (
     <div>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              <h1> Main Page, nothing to show... </h1>
-            </div>
-          }
-        />
-        <Route path="/settings" element={<SettingsPage />} />
-
-        <Route path="/countries" element={<AsyncProtectedRoute />}>
-          <Route index element={<CountriesPage />} />
+        <Route element={<AsyncProtectedRoute />}>
+          <Route path="" element={<MainPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path="countries" element={<CountriesPage />} />
         </Route>
 
         <Route path="/country/:code" element={<CountryPage />} />
