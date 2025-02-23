@@ -17,12 +17,9 @@ export default function LoginPage() {
   // const [userName, setUserName] = useState("");
   // const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
   const userNameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-
   const counterFailureInLoginRef = useRef(0);
-
   const navigate = useNavigate();
   console.log("Login page render.,.,,");
   useEffect(() => {
@@ -39,7 +36,7 @@ export default function LoginPage() {
 
   async function handleLoginAction() {
     if (counterFailureInLoginRef.current > 3) {
-      window.location.href = "/auth/register";
+      window.location.href = "/auth/fp";
     }
     const userName = userNameRef?.current?.value;
     const password = passwordRef?.current?.value;

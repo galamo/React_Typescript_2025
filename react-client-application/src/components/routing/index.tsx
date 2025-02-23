@@ -8,6 +8,7 @@ import LoginPage from "../pages/auth-page/login-page";
 import { AuthLayoutPage } from "../pages/auth-page";
 import AsyncProtectedRoute from "../async-auth-protector";
 import MainPage from "../pages/main-page";
+import ForgatPasswordPage from "../pages/auth-page/forgat-pass-page";
 
 export default function Routing() {
   return (
@@ -24,6 +25,7 @@ export default function Routing() {
           <Route index element={<Navigate to="register" />} />
           <Route path="register" element={<RegistrationPage />} />
           <Route path="login" element={<LoginPage />} />
+          <Route path="fp" element={<ForgatPasswordPage />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
