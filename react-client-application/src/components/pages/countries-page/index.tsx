@@ -9,7 +9,7 @@ export type CountryServer = (typeof StaticData)[0]; // using the StaticData only
 
 const dns = "http://localhost:2200/api";
 const urlAllCountries = `${dns}/countries-delay/`;
-const urlNameCountries = `${dns}/countries-delay/name/`;
+// const urlNameCountries = `${dns}/countries-delay/name/`;
 
 export default function CountriesPage() {
   const [filter, setFilter] = useState("");
@@ -19,7 +19,7 @@ export default function CountriesPage() {
   const [countryName, setCountryName] = useState("");
 
   useEffect(() => {
-    console.log("CountriesPage route loaded")
+    console.log("CountriesPage route loaded");
     let isSubscribed = true;
     async function getCountries() {
       try {

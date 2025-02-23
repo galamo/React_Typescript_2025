@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useEffect, useMemo, useState } from "react";
 import { PieChart, Pie, Cell } from "recharts";
 import {
@@ -13,7 +14,7 @@ import {
 import { Country } from "../countries-page/country";
 import { CountryServer } from "../countries-page";
 import axios from "axios";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 
 interface DataLine {
   name: string;
@@ -102,15 +103,23 @@ export default function ReportsPage() {
     };
   }, []);
 
-  const memoizedValue = useMemo(() => {
-    return simpleCalcAggregationByRegion(countries);
+  const memoizedAdaptedData = useMemo(() => {
+    const data = simpleCalcAggregationByRegion(countries);
+    const adaptedData: Array<{ name: string; value: number }> =
+      getAdaptedData(data);
+    return adaptedData;
   }, [countries]);
 
-  const adaptedData: Array<{ name: string; value: number }> =
-    getAdaptedData(memoizedValue);
+  const memoizedAdaptedDataPopulation = useMemo(() => {
+    const data = simpleCalcAggregationByRegionPopulation(countries);
+    const adaptedData: Array<{ name: string; value: number }> =
+      getAdaptedData(data);
+    return adaptedData;
+  }, [countries]);
 
   return (
     <>
+      {isLoading ? <CircularProgress /> : null}
       <h1>Reports</h1>
       <Button
         onClick={() => {
@@ -126,7 +135,16 @@ export default function ReportsPage() {
           alignItems: "center",
         }}
       >
-        <PieChartApp data={adaptedData} />
+        <PieChartApp data={memoizedAdaptedData} />
+        <PieChartApp data={memoizedAdaptedDataPopulation} />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <LineChartApp data={lineChartData} />
       </div>
     </>
@@ -134,7 +152,7 @@ export default function ReportsPage() {
 }
 function PieChartApp(props: { data: Array<{ name: string; value: number }> }) {
   return (
-    <PieChart width={600} height={900}>
+    <PieChart width={700} height={400}>
       <Pie
         data={props.data}
         cx={120}
@@ -145,7 +163,7 @@ function PieChartApp(props: { data: Array<{ name: string; value: number }> }) {
         paddingAngle={5}
         dataKey="value"
         label={(data) => {
-          return data.name;
+          return data.name + " " + data.value;
         }}
       >
         {data.map((entry, index) => (
@@ -155,6 +173,7 @@ function PieChartApp(props: { data: Array<{ name: string; value: number }> }) {
     </PieChart>
   );
 }
+// @ts-ignore
 function LineChartApp(props: any) {
   return (
     <>
@@ -185,6 +204,40 @@ function LineChartApp(props: any) {
     </>
   );
 }
+
+function simpleCalcAggregationByRegion(countries: Country[]) {
+  console.log("Calculating long process.....");
+  if (!Array.isArray(countries)) return;
+  const regionsObj: { [key: string]: number } = {};
+  countries.forEach((c) => {
+    if (regionsObj[c.region]) {
+      regionsObj[c.region] = regionsObj[c.region] + 1;
+    } else {
+      regionsObj[c.region] = 1;
+    }
+  });
+  return regionsObj;
+}
+
+function simpleCalcAggregationByRegionPopulation(countries: Country[]) {
+  if (!Array.isArray(countries)) return;
+  const regionsObj: { [key: string]: number } = {};
+  countries.forEach((c) => {
+    if (regionsObj[c.region]) {
+      regionsObj[c.region] = regionsObj[c.region] + c.population;
+    } else {
+      regionsObj[c.region] = c.population;
+    }
+  });
+  return regionsObj;
+}
+
+function getAdaptedData(result: { [key: string]: number } | undefined) {
+  return Object.entries(result).map(([key, value]) => {
+    return { name: key, value };
+  });
+}
+
 // calculation
 function calcAggregationByRegion(countries: Country[]) {
   if (!Array.isArray(countries)) return [];
@@ -204,24 +257,4 @@ function calcAggregationByRegion(countries: Country[]) {
     }
   }, {});
   return result;
-}
-
-function simpleCalcAggregationByRegion(countries: Country[]) {
-  console.log("Calculating long process.....");
-  if (!Array.isArray(countries)) return;
-  const regionsObj: { [key: string]: number } = {};
-  countries.forEach((c) => {
-    if (regionsObj[c.region]) {
-      regionsObj[c.region] = regionsObj[c.region] + 1;
-    } else {
-      regionsObj[c.region] = 1;
-    }
-  });
-  return regionsObj;
-}
-
-function getAdaptedData(result: { [key: string]: number } | undefined) {
-  return Object.entries(result).map(([key, value]) => {
-    return { name: key, value };
-  });
 }

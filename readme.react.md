@@ -1468,14 +1468,23 @@ root.render(<App />);
   more.
 
 # Ex 1 - 23.2
+
 1. use useEffect inside login
 2. clear the token on mounting
 
 # Ex 2 - 23.2
+
 1. use the AsyncProtectedRoute to protect the main page and setting page
 
-
 # Ex 3 - 23.2
+
 1. change the register page to work with useRef instead useState
 
+# Ex 4 - 23.2
 
+1. try to memoize the `getAdaptedData`
+2. try to create another pie chart that shows population per region
+
+# Ex 5 - 23.2
+
+1. use lazy loading for countriesPage, settings and about
