@@ -1,5 +1,5 @@
 import { Button, CircularProgress, TextField } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import css from "./style.module.css";
 import { z } from "zod";
 import Swal from "sweetalert2";
@@ -19,9 +19,15 @@ export default function RegistrationPage() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  function handlePhone(event: React.ChangeEvent<HTMLInputElement>) {
+  // function handlePhone(event: React.ChangeEvent<HTMLInputElement>) {
+  //   setPhone(event.target.value);
+  // }
+  const handlePhone = useCallback(function (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) {
     setPhone(event.target.value);
-  }
+  },
+  []);
 
   function handleUserName(event: React.ChangeEvent<HTMLInputElement>) {
     setUserName(event.target.value);

@@ -152,11 +152,11 @@ export default function ReportsPage() {
 }
 function PieChartApp(props: { data: Array<{ name: string; value: number }> }) {
   return (
-    <PieChart width={700} height={400}>
+    <PieChart width={600} height={500}>
       <Pie
         data={props.data}
-        cx={120}
-        cy={200}
+        cx={"50%"}
+        cy={"50%"}
         innerRadius={20}
         outerRadius={90}
         fill="#8884d8"
