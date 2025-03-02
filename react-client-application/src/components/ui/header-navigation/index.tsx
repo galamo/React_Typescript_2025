@@ -109,6 +109,12 @@ function ResponsiveAppBar() {
               </Button>
             </NavLink>
 
+            <NavLink to="/posts">
+              <Button sx={{ my: 2, color: "white", display: "block" }}>
+                Posts
+              </Button>
+            </NavLink>
+
             <NavLink to="/settings">
               <Button sx={{ my: 2, color: "white", display: "block" }}>
                 Settings

@@ -12,6 +12,7 @@ import ForgatPasswordPage from "../pages/auth-page/forgat-pass-page";
 // import ReportsPage from "../pages/reports-page";
 import { Suspense, lazy } from "react";
 import { CircularProgress } from "@mui/material";
+import PostsPage from "../pages/posts-page";
 
 const CountriesReportLazy = lazy(() => {
   return import("../pages/reports-page");
@@ -34,6 +35,7 @@ export default function Routing() {
             </Suspense>
           }
         />
+        <Route path="/posts" element={<PostsPage />} />
         <Route path="/country/:code" element={<CountryPage />} />
         <Route path="/auth" element={<AuthLayoutPage />}>
           <Route index element={<Navigate to="register" />} />
