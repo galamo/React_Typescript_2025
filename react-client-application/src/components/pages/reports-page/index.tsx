@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { PieChart, Pie, Cell } from "recharts";
 import {
   LineChart,
@@ -15,6 +15,8 @@ import { Country } from "../countries-page/country";
 import { CountryServer } from "../countries-page";
 import axios from "axios";
 import { Button, CircularProgress } from "@mui/material";
+import { SettingsContext } from "../../../context";
+import millify from "millify";
 
 interface DataLine {
   name: string;
@@ -65,7 +67,6 @@ export default function ReportsPage() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [lineChartData, setLineChartData] = useState<Array<DataLine>>([]);
   const [isLoading, setIsLoading] = useState(true);
-  // useContext
 
   useEffect(() => {
     console.log("CountriesPage route loaded");
@@ -152,6 +153,8 @@ export default function ReportsPage() {
   );
 }
 function PieChartApp(props: { data: Array<{ name: string; value: number }> }) {
+  const context = useContext(SettingsContext);
+
   return (
     <PieChart width={600} height={500}>
       <Pie
@@ -164,7 +167,9 @@ function PieChartApp(props: { data: Array<{ name: string; value: number }> }) {
         paddingAngle={5}
         dataKey="value"
         label={(data) => {
-          return data.name + " " + data.value; // check global state? millify(value)
+          return `${data.name} ${
+            context.isPrettyNumbers ? millify(data.value) : data.value
+          }`; // check global state? millify(value)
         }}
       >
         {data.map((entry, index) => (

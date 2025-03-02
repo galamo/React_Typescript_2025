@@ -97,9 +97,9 @@ export default function SettingsPage() {
         >
           <h3> Pretty numbers </h3>
           <Switch
-            checked={true}
+            checked={context.isPrettyNumbers}
             onChange={() => {
-              // complete action!
+              context.dispatch({ type: ACTIONS.SET_IS_PRETTY_NUMBERS });
             }}
           />
         </div>
