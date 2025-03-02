@@ -1491,3 +1491,35 @@ root.render(<App />);
 3. going to production - source map explorer
 4. useContext useReducer
 5. redux
+
+# Ex 1 - 2/3
+
+1. implement custom hook for fetching data from api
+
+2. Requirements:
+
+- Accept a url parameter.
+- Return { data, loading, error }.
+- Use axios inside a useEffect.
+- Handle errors with try/catch.
+
+```javascript
+function useFetch(url) {
+  // should implement:
+  // - loading state
+  // - error state
+  // - data state
+  // - Fetch the data inside useEffect
+  // - Cleanup on URL change (optional)
+
+  return {}; // Return { data, loading, error }
+}
+```
+
+3. usage
+
+```javascript
+const { data, loading, error } = useFetch(
+  "https://jsonplaceholder.typicode.com/posts"
+);
+```
