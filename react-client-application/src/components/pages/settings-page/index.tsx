@@ -1,13 +1,17 @@
 import { Button, Switch } from "@mui/material";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { useDocumentTitle } from "../countries-page/hooks/useDocumentTitle";
 import { useImageLoaded } from "../countries-page/hooks/useImageLoaded";
 import { SettingsContext } from "../../../context";
 import { ACTIONS } from "../../../context/settingProvider";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { setReportPL } from "../../../store/settingsSlice";
+import {
+  setPostsPL,
+  setReportPL,
+  setUserName,
+} from "../../../store/settingsSlice";
 
 const SETTINGS_URL = "http://localhost:2200/api/settings";
 
@@ -18,6 +22,10 @@ export default function SettingsPage() {
   const reduxDispatch = useAppDispatch();
   const isReportsAvailable = useAppSelector(
     (state) => state.settings.reportsAvailable
+  );
+  const userNameRef = useRef<HTMLInputElement>(null);
+  const isPostsAvailable = useAppSelector(
+    (state) => state.settings.isPostsAvailable
   );
   const context = useContext(SettingsContext);
   const [image] = useImageLoaded(
@@ -48,14 +56,24 @@ export default function SettingsPage() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "90vh",
       }}
     >
       <div
         style={{ marginTop: "60px", display: "flex", flexDirection: "column" }}
       >
         <h1> Settings</h1>
-        <h2> Hello {userName} </h2>
+
+        <div style={{ border: "1px solid red" }}>
+          <input ref={userNameRef} type="text" />
+          <Button
+            onClick={() => {
+              reduxDispatch(setUserName(userNameRef?.current?.value));
+            }}
+          >
+            Set User
+          </Button>
+        </div>
+
         <div
           style={{
             display: "flex",
@@ -124,6 +142,23 @@ export default function SettingsPage() {
             checked={isReportsAvailable}
             onChange={() => {
               reduxDispatch(setReportPL());
+            }}
+          />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+          }}
+        >
+          <h3> Posts PL </h3>
+          <Switch
+            checked={isPostsAvailable}
+            onChange={() => {
+              reduxDispatch(setPostsPL());
             }}
           />
         </div>

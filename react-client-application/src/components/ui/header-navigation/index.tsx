@@ -14,12 +14,24 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 import { useAppSelector } from "../../../store/hooks";
+import { shallowEqual } from "react-redux";
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
-  const isReportsAvailable = useAppSelector(
-    (state) => state.settings.reportsAvailable
+
+  const { isReportsAvailable, isPostsAvailable, userName } = useAppSelector(
+    (state) => {
+      return {
+        isReportsAvailable: state.settings.reportsAvailable,
+        isPostsAvailable: state.settings.isPostsAvailable,
+        userName: state.settings.userName,
+      };
+    },
+    shallowEqual
   );
+
+  const un = userName;
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -113,12 +125,6 @@ function ResponsiveAppBar() {
               </Button>
             </NavLink>
 
-            <NavLink to="/posts">
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
-                Posts
-              </Button>
-            </NavLink>
-
             <NavLink to="/settings">
               <Button sx={{ my: 2, color: "white", display: "block" }}>
                 Settings
@@ -133,6 +139,14 @@ function ResponsiveAppBar() {
               </NavLink>
             ) : null}
 
+            {isPostsAvailable ? (
+              <NavLink to="/posts">
+                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                  Posts
+                </Button>
+              </NavLink>
+            ) : null}
+
             <Button
               onClick={() => {
                 navigate("/about");
@@ -142,6 +156,7 @@ function ResponsiveAppBar() {
               About
             </Button>
           </Box>
+          <h2 style={{ marginRight: "10px" }}>{un}</h2>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton
