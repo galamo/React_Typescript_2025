@@ -1462,7 +1462,6 @@ root.render(<App />);
 2. Use Schema Validation Zod
 3. On click on button login - do nothing! just validate
 
-
 # Ex 1 - 23.2
 
 1. use useEffect inside login
@@ -1484,3 +1483,11 @@ root.render(<App />);
 # Ex 5 - 23.2
 
 1. use lazy loading for countriesPage, settings and about
+
+# Subjects:
+
+1. Error handling
+2. Custom hooks
+3. going to production - source map explorer
+4. useContext useReducer
+5. redux
