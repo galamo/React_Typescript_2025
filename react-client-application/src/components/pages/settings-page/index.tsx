@@ -77,11 +77,29 @@ export default function SettingsPage() {
           <h3> Posts Theme </h3>
           <input
             type="text"
+            value={context.postsTheme}
             onChange={(event) => {
               context.dispatch({
                 type: ACTIONS.SET_POSTS_THEME,
                 payload: event.target.value,
               });
+            }}
+          />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+          }}
+        >
+          <h3> Pretty numbers </h3>
+          <Switch
+            checked={true}
+            onChange={() => {
+              // complete action!
             }}
           />
         </div>

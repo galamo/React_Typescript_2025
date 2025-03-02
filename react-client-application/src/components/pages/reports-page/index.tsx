@@ -65,6 +65,7 @@ export default function ReportsPage() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [lineChartData, setLineChartData] = useState<Array<DataLine>>([]);
   const [isLoading, setIsLoading] = useState(true);
+  // useContext
 
   useEffect(() => {
     console.log("CountriesPage route loaded");
@@ -163,7 +164,7 @@ function PieChartApp(props: { data: Array<{ name: string; value: number }> }) {
         paddingAngle={5}
         dataKey="value"
         label={(data) => {
-          return data.name + " " + data.value;
+          return data.name + " " + data.value; // check global state? millify(value)
         }}
       >
         {data.map((entry, index) => (

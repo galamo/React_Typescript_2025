@@ -1523,3 +1523,9 @@ const { data, loading, error } = useFetch(
   "https://jsonplaceholder.typicode.com/posts"
 );
 ```
+
+# Ex 3
+
+1. create new action in Settings Reducer.
+2. use the new action in the settings page
+3. use in the reports page the relevant state `isPrettyNumber`
