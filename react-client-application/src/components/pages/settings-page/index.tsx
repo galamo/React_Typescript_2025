@@ -6,6 +6,8 @@ import { useDocumentTitle } from "../countries-page/hooks/useDocumentTitle";
 import { useImageLoaded } from "../countries-page/hooks/useImageLoaded";
 import { SettingsContext } from "../../../context";
 import { ACTIONS } from "../../../context/settingProvider";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { setReportPL } from "../../../store/settingsSlice";
 
 const SETTINGS_URL = "http://localhost:2200/api/settings";
 
@@ -13,7 +15,10 @@ export default function SettingsPage() {
   const [userName, setuserName] = useState("");
   const navigate = useNavigate();
   useDocumentTitle(`Settings: ${userName}`);
-
+  const reduxDispatch = useAppDispatch();
+  const isReportsAvailable = useAppSelector(
+    (state) => state.settings.reportsAvailable
+  );
   const context = useContext(SettingsContext);
   const [image] = useImageLoaded(
     "https://img.uxcel.com/practices/describe-settings-clearly-1652784157844/a-1661429767314-2x.jpg"
@@ -46,7 +51,9 @@ export default function SettingsPage() {
         height: "90vh",
       }}
     >
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div
+        style={{ marginTop: "60px", display: "flex", flexDirection: "column" }}
+      >
         <h1> Settings</h1>
         <h2> Hello {userName} </h2>
         <div
@@ -100,6 +107,23 @@ export default function SettingsPage() {
             checked={context.isPrettyNumbers}
             onChange={() => {
               context.dispatch({ type: ACTIONS.SET_IS_PRETTY_NUMBERS });
+            }}
+          />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+          }}
+        >
+          <h3> Report PL </h3>
+          <Switch
+            checked={isReportsAvailable}
+            onChange={() => {
+              reduxDispatch(setReportPL());
             }}
           />
         </div>

@@ -13,9 +13,13 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
+import { useAppSelector } from "../../../store/hooks";
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
+  const isReportsAvailable = useAppSelector(
+    (state) => state.settings.reportsAvailable
+  );
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -121,11 +125,13 @@ function ResponsiveAppBar() {
               </Button>
             </NavLink>
 
-            <NavLink to="/reports">
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
-                Reports
-              </Button>
-            </NavLink>
+            {isReportsAvailable ? (
+              <NavLink to="/reports">
+                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                  Reports
+                </Button>
+              </NavLink>
+            ) : null}
 
             <Button
               onClick={() => {
