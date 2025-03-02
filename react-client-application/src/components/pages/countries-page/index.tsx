@@ -5,6 +5,8 @@ import StaticData from "./data.json";
 import css from "./index.module.css";
 import debounce from "lodash/debounce";
 import { CircularProgress, Input, Skeleton } from "@mui/material";
+import { useDocumentTitle } from "./hooks/useDocumentTitle";
+import { SettingsOutlined } from "@mui/icons-material";
 export type CountryServer = (typeof StaticData)[0]; // using the StaticData only for Type
 
 const dns = "http://localhost:2200/api";
@@ -17,6 +19,9 @@ export default function CountriesPage() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [countryName, setCountryName] = useState("");
+  const [counter, setCounter] = useState(0);
+
+  useDocumentTitle(`Countries: ${countryName}`);
 
   useEffect(() => {
     console.log("CountriesPage route loaded");
@@ -87,6 +92,13 @@ export default function CountriesPage() {
   return (
     <div style={{ marginTop: "50px" }}>
       {/* <HeaderApp title={"Countries"} /> */}
+      <button
+        onClick={() => {
+          setCounter(counter + 1);
+        }}
+      >
+        change title{" "}
+      </button>
       <input onChange={onFilterHandler} />
       <button onClick={onAsiaHandler}> Only Asia Countries </button>
       <div>
