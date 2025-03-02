@@ -1,7 +1,11 @@
 import { CircularProgress } from "@mui/material";
 import { useGet } from "../../../hooks/useGet";
+import { useContext } from "react";
+import { SettingsContext } from "../../../context";
 
 export default function PostsPage() {
+  const { isLocalTime, postsTheme } = useContext(SettingsContext);
+
   const { data, loading, error } = useGet(
     "https://jsonplaceholder.typicode.com/posts"
   );
@@ -10,14 +14,24 @@ export default function PostsPage() {
 
   return (
     <div>
-      <h1>Posts</h1>
+      <h1>Posts {isLocalTime.toString()}</h1>
+
       {loading ? <CircularProgress /> : null}
       {error ? <span style={{ color: "red" }}>{error} </span> : null}
       <div>
         {Array.isArray(data) &&
           adaptedDate?.map((item) => {
             return (
-              <h3 style={{ border: "1px solid black" }}>{item.description} </h3>
+              <div
+                style={{ border: "1px solid black", background: postsTheme }}
+              >
+                <h3>{item.description} </h3>
+                <h4>
+                  {isLocalTime
+                    ? new Date().toLocaleString()
+                    : new Date().toISOString()}{" "}
+                </h4>
+              </div>
             );
           })}
       </div>
